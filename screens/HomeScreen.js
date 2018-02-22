@@ -12,19 +12,23 @@ export default class HomeScreen extends Component {
         super(props)
         this.state = {
             projects: []
-        }
+        };
     }
 
-    componentDidMount() {
-        this.setState({
-            projects: [
-                { name: 'Test Project 1', description: 'coolio proj' },
-                { name: 'Test Project 2', description: 'coolio proj' },
-                { name: 'Test Project 3', description: 'coolio proj' },
-                { name: 'Test Project 4', description: 'coolio proj' }
+    async componentDidMount() {
+        let projects = await this.fetchProjects();
+        this.setState({ projects }); 
+    }
 
-            ]
-        })
+    async fetchProjects() {
+        try {
+            let result = await fetch({ url: 'https://gravity.covalence.io/api/graduation/projects' });
+            let projects = await result.json();
+            return projects;
+        } catch(e) {
+            console.log(e);
+            return;
+        }
     }
 
     navigate(project) {
@@ -35,9 +39,9 @@ export default class HomeScreen extends Component {
         return (
             <ScrollView style={styles.container}>
                 {this.state.projects.map((project, index) => {
-                    return <ProjectCard key={index} project={project} 
-                                Navigate={ () => {this.navigate(project)} } 
-                            />
+                    return <ProjectCard key={index} project={project}
+                        Navigate={() => { this.navigate(project) }}
+                    />
                 })}
             </ScrollView>
         )
