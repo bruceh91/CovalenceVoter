@@ -30,9 +30,10 @@ export default class HomeScreen extends Component {
             return;
         }
     }
+    
 
     navigate(project) {
-        this.props.navigation.navigate('ProjectDetail', { project: project });
+        this.props.navigation.navigate('ProjectTab', { project: project });
     }
 
     render() {

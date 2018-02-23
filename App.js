@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { StackNavigator } from 'react-navigation';
 
 import HomeScreen from './screens/HomeScreen';
-import ProjectDetailScreen from './screens/ProjectDetailScreen'; 
+import ProjectTabScreen from './screens/ProjectTabScreen'; 
 
 const RootNavigator = StackNavigator({
   Home: { screen: HomeScreen },
-  ProjectDetail: { screen: ProjectDetailScreen}
+  ProjectTab: { screen: ProjectTabScreen}
 }, { 
   initialRouteName: 'Home'
 });
